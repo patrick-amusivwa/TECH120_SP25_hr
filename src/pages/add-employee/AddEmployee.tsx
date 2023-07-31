@@ -1,7 +1,7 @@
-import React from 'react';
+import { PageContainer } from './AddEmployee.styles';
 
 const AddEmployee = () => {
-  return <div>AddEmployee</div>;
+  return <PageContainer>Add Employee</PageContainer>;
 };
 
 export default AddEmployee;

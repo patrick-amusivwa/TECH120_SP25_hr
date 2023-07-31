@@ -1,7 +1,7 @@
-import React from 'react';
+import { PageContainer } from './EmployeeDetails.styles';
 
 const EmployeeDetails = () => {
-  return <div>EmployeeDetails</div>;
+  return <PageContainer>EmployeeDetails</PageContainer>;
 };
 
 export default EmployeeDetails;

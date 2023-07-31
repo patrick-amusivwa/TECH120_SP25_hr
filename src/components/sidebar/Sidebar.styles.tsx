@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const SidebarContainer = styled.div`
   width: 20vw;
@@ -10,14 +11,12 @@ export const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  //justify-content: center;
-  border: 1px solid green;
 `;
 
 export const LogoContainer = styled.div`
   padding: 10px;
-  border: 1px solid red;
-  width: 100%;
+  border: 1px solid white;
+  width: 200px;
   height: 100px;
   margin: 50px;
 
@@ -26,15 +25,26 @@ export const LogoContainer = styled.div`
   justify-content: center;
 `;
 
-export const MenuContainer = styled.div`
+export const Logo = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: 700;
+`;
+
+export const MenuContainer = styled(Link)`
   padding: 10px;
-  border: 1px solid red;
-  width: 100%;
+  border: 1px solid white;
   margin: 10px;
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  width: 200px;
+  text-decoration: none;
+  color: white;
 `;
 
-export const MenuItem = styled.div``;
+export const MenuItem = styled.div`
+  padding: 0 10px;
+`;
