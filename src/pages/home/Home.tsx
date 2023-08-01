@@ -1,9 +1,9 @@
-import { PageContainer } from './Home.styles';
+import { PageContainer, PageHeader } from './Home.styles';
 
 const Home = () => {
   return (
     <PageContainer>
-      <div>Home</div>
+      <PageHeader>Home</PageHeader>
     </PageContainer>
   );
 };

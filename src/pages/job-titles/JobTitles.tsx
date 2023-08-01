@@ -1,7 +1,11 @@
-import { PageContainer } from './JobTitles.styles';
+import { PageContainer, PageHeader } from './JobTitles.styles';
 
 const JobTitles = () => {
-  return <PageContainer>JobTitles</PageContainer>;
+  return (
+    <PageContainer>
+      <PageHeader>Job Positions</PageHeader>
+    </PageContainer>
+  );
 };
 
 export default JobTitles;

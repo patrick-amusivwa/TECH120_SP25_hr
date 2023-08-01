@@ -1,7 +1,11 @@
-import { PageContainer } from './Departments.styles';
+import { PageContainer, PageHeader } from './Departments.styles';
 
 const Departments = () => {
-  return <PageContainer>Departments</PageContainer>;
+  return (
+    <PageContainer>
+      <PageHeader>Departments</PageHeader>
+    </PageContainer>
+  );
 };
 
 export default Departments;
