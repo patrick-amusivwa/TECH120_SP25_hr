@@ -39,8 +39,11 @@ export const TableItem = styled.h1`
 `;
 
 export const StyledTableRow = styled(TableRow)`
+  color: white;
+
   &:hover {
     background-color: green;
     cursor: pointer;
+    color: black;
   }
 `;

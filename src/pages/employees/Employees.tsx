@@ -8,6 +8,7 @@ import {
 } from './Employees.styles';
 import axios from 'axios';
 import {
+  Box,
   Table,
   TableBody,
   TableCell,
@@ -53,7 +54,7 @@ const Employees = () => {
 
       const fetchedEmployees = response.data;
       setEmployees(fetchedEmployees);
-      console.log(fetchedEmployees);
+      console.table(fetchedEmployees);
     } catch (error) {}
   };
 
@@ -101,64 +102,66 @@ const Employees = () => {
     <>
       <PageContainer>
         <PageHeader>Employees</PageHeader>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>
-                <TableHeader>Last Name</TableHeader>
-              </TableCell>
-              <TableCell>
-                <TableHeader>First Name</TableHeader>
-              </TableCell>
-              <TableCell>
-                <TableHeader>Email</TableHeader>
-              </TableCell>
-              <TableCell>
-                <TableHeader>Phone Number</TableHeader>
-              </TableCell>
-              <TableCell>
-                <TableHeader>Department</TableHeader>
-              </TableCell>
-              <TableCell>
-                <TableHeader>Position</TableHeader>
-              </TableCell>
-              <TableCell>
-                <TableHeader>Salary</TableHeader>
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {employees.map((employee) => (
-              <StyledTableRow key={employee.id}>
+        <Box sx={{ m: 3, border: '1px solid white' }}>
+          <Table>
+            <TableHead>
+              <TableRow>
                 <TableCell>
-                  <Link to={`/employees/${employee.id}`}>
-                    <TableItem>{employee.lastName}</TableItem>
-                  </Link>
+                  <TableHeader>Last Name</TableHeader>
                 </TableCell>
                 <TableCell>
-                  <TableItem>{employee.firstName}</TableItem>
+                  <TableHeader>First Name</TableHeader>
                 </TableCell>
                 <TableCell>
-                  <TableItem> {employee.email}</TableItem>
+                  <TableHeader>Email</TableHeader>
                 </TableCell>
                 <TableCell>
-                  <TableItem> {employee.phoneNumber}</TableItem>
+                  <TableHeader>Phone Number</TableHeader>
                 </TableCell>
                 <TableCell>
-                  <TableItem>
-                    {getDepartmentName(employee.departmentId)}
-                  </TableItem>
+                  <TableHeader>Department</TableHeader>
                 </TableCell>
                 <TableCell>
-                  <TableItem> {getJobTitle(employee.jobTitleId)}</TableItem>
+                  <TableHeader>Position</TableHeader>
                 </TableCell>
                 <TableCell>
-                  <TableItem> {employee.salary}</TableItem>
+                  <TableHeader>Salary</TableHeader>
                 </TableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {employees.map((employee) => (
+                <StyledTableRow key={employee.id}>
+                  <TableCell>
+                    <Link to={`/employees/${employee.id}`}>
+                      <TableItem>{employee.lastName}</TableItem>
+                    </Link>
+                  </TableCell>
+                  <TableCell>
+                    <TableItem>{employee.firstName}</TableItem>
+                  </TableCell>
+                  <TableCell>
+                    <TableItem> {employee.email}</TableItem>
+                  </TableCell>
+                  <TableCell>
+                    <TableItem> {employee.phoneNumber}</TableItem>
+                  </TableCell>
+                  <TableCell>
+                    <TableItem>
+                      {getDepartmentName(employee.departmentId)}
+                    </TableItem>
+                  </TableCell>
+                  <TableCell>
+                    <TableItem> {getJobTitle(employee.jobTitleId)}</TableItem>
+                  </TableCell>
+                  <TableCell>
+                    <TableItem> {employee.salary}</TableItem>
+                  </TableCell>
+                </StyledTableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Box>
       </PageContainer>
       ;
     </>
