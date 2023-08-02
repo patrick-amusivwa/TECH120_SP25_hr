@@ -26,3 +26,18 @@ export const PageHeader = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const WelcomeContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  border: 1px solid white;
+  color: white;
+  padding: 20px;
+  margin: 30px 0;
+  font-size: 30px;
+  letter-spacing: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

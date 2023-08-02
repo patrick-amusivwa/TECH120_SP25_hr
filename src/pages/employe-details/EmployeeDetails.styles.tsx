@@ -1,3 +1,4 @@
+import { Box, Button } from '@mui/material';
 import styled from 'styled-components';
 
 export const PageContainer = styled.div`
@@ -26,3 +27,20 @@ export const PageHeader = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const ButtonContainer = styled(Box)`
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const EditButton = styled(Button)`
+  width: 400px;
+  padding: 10px;
+`;
+
+export const style = {
+  color: 'white',
+};

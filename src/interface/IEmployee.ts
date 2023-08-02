@@ -24,3 +24,15 @@ export interface EmployeeFormProps {
   jobTitles: JobTitleData[];
   onSubmit: (formData: EmployeeData) => void;
 }
+export interface Employee {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  salary: number;
+  departmentId: number | null;
+  jobTitleId: number | null;
+  departmentName: string;
+  jobTitleName: string;
+}

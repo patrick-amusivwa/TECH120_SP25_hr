@@ -14,6 +14,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 interface IEmployee {
   id: number;
@@ -130,7 +131,9 @@ const Employees = () => {
             {employees.map((employee) => (
               <StyledTableRow key={employee.id}>
                 <TableCell>
-                  <TableItem>{employee.lastName}</TableItem>
+                  <Link to={`/employees/${employee.id}`}>
+                    <TableItem>{employee.lastName}</TableItem>
+                  </Link>
                 </TableCell>
                 <TableCell>
                   <TableItem>{employee.firstName}</TableItem>
