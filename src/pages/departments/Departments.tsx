@@ -34,9 +34,7 @@ const Departments = () => {
   const [selectedDepartment, setSelectedDepartment] = useState<number | null>(
     null
   );
-  const [firstDepartmentId, setFirstDepartmentId] = useState<number | null>(
-    null
-  );
+  const [activeDepartment, setActiveDepartment] = useState<number | null>(null);
 
   // const [jobTitles, setJobTitles] = useState<IJobTitle[]>([]);
 
@@ -47,11 +45,6 @@ const Departments = () => {
       );
       const fetchedDepartments = response.data;
       setDepartments(fetchedDepartments);
-
-      if (fetchedDepartments.length > 0) {
-        const firstDepartment = fetchedDepartments[0];
-        setFirstDepartmentId(firstDepartment.id);
-      }
     } catch (error) {}
   };
 
@@ -70,15 +63,17 @@ const Departments = () => {
   }, []);
 
   useEffect(() => {
-    if (firstDepartmentId !== null) {
-      // Fetch employees for the first department when the component loads
-      fetchEmployeesByDepartment(firstDepartmentId);
-      setSelectedDepartment(firstDepartmentId); // Set the first department as the default selection
+    if (departments.length > 0) {
+      // Set the first department as the active department by default
+      setActiveDepartment(departments[0].id);
+      setSelectedDepartment(departments[0].id); // Set the first department as selected when component loads
+      fetchEmployeesByDepartment(departments[0].id); // Fetch employees for the first department when component loads
     }
-  }, [firstDepartmentId]);
+  }, [departments]);
 
   const handleDepartmentClick = (departmentId: number) => {
     setSelectedDepartment(departmentId);
+    setActiveDepartment(departmentId);
     fetchEmployeesByDepartment(departmentId);
   };
 
@@ -98,6 +93,7 @@ const Departments = () => {
         {departments.map((department) => (
           <Box
             key={department.id}
+            onClick={() => handleDepartmentClick(department.id)}
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -106,9 +102,11 @@ const Departments = () => {
               m: 1,
               width: '300px',
               flexWrap: 'wrap',
+              backgroundColor:
+                department.id === activeDepartment ? 'green' : 'transparent',
             }}
           >
-            <Button onClick={() => handleDepartmentClick(department.id)}>
+            <Button>
               <Typography sx={{ color: 'white' }}>{department.name}</Typography>
             </Button>
           </Box>

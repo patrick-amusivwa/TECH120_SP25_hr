@@ -27,7 +27,7 @@ const JobTitles = () => {
   const [jobTitles, setJobTitles] = useState<IJobTitle[]>([]);
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [selectedJobTitle, setSelectedJobTitle] = useState<number | null>(null);
-  const [firstJobTitleId, setFirstJobTitleId] = useState<number | null>(null);
+  const [activeJobTitle, setActiveJobTitle] = useState<number | null>(null);
 
   const fetchJobTitles = async () => {
     try {
@@ -36,11 +36,6 @@ const JobTitles = () => {
       );
       const fetchedJobTitles = response.data;
       setJobTitles(fetchedJobTitles);
-
-      if (fetchedJobTitles.length > 0) {
-        const firstJobTitle = fetchedJobTitles[0];
-        setFirstJobTitleId(firstJobTitle.id);
-      }
     } catch (error) {}
   };
 
@@ -59,14 +54,17 @@ const JobTitles = () => {
   }, []);
 
   useEffect(() => {
-    if (firstJobTitleId !== null) {
-      fetchEmployeesByJobTitle(firstJobTitleId);
-      setSelectedJobTitle(firstJobTitleId);
+    if (jobTitles.length > 0) {
+      // Set the first department as the active department by default
+      setActiveJobTitle(jobTitles[0].id);
+      setSelectedJobTitle(jobTitles[0].id); // Set the first department as selected when component loads
+      fetchEmployeesByJobTitle(jobTitles[0].id); // Fetch employees for the first department when component loads
     }
-  }, [firstJobTitleId]);
+  }, [jobTitles]);
 
   const handleJobTitleClick = (jobTitleId: number) => {
     setSelectedJobTitle(jobTitleId);
+    setActiveJobTitle(jobTitleId);
     fetchEmployeesByJobTitle(jobTitleId);
   };
 
@@ -86,6 +84,7 @@ const JobTitles = () => {
         {jobTitles.map((jobTitle) => (
           <Box
             key={jobTitle.id}
+            onClick={() => handleJobTitleClick(jobTitle.id)}
             sx={{
               display: 'flex',
               alignItems: 'center',
@@ -94,9 +93,11 @@ const JobTitles = () => {
               m: 1,
               width: '300px',
               flexWrap: 'wrap',
+              backgroundColor:
+                jobTitle.id === activeJobTitle ? 'green' : 'transparent',
             }}
           >
-            <Button onClick={() => handleJobTitleClick(jobTitle.id)}>
+            <Button>
               <Typography sx={{ color: 'white' }}>{jobTitle.title}</Typography>
             </Button>
           </Box>
