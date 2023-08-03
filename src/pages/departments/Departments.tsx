@@ -34,6 +34,10 @@ const Departments = () => {
   const [selectedDepartment, setSelectedDepartment] = useState<number | null>(
     null
   );
+  const [firstDepartmentId, setFirstDepartmentId] = useState<number | null>(
+    null
+  );
+
   // const [jobTitles, setJobTitles] = useState<IJobTitle[]>([]);
 
   const fetchDepartments = async () => {
@@ -43,7 +47,11 @@ const Departments = () => {
       );
       const fetchedDepartments = response.data;
       setDepartments(fetchedDepartments);
-      console.log(fetchedDepartments);
+
+      if (fetchedDepartments.length > 0) {
+        const firstDepartment = fetchedDepartments[0];
+        setFirstDepartmentId(firstDepartment.id);
+      }
     } catch (error) {}
   };
 
@@ -60,6 +68,14 @@ const Departments = () => {
   useEffect(() => {
     fetchDepartments();
   }, []);
+
+  useEffect(() => {
+    if (firstDepartmentId !== null) {
+      // Fetch employees for the first department when the component loads
+      fetchEmployeesByDepartment(firstDepartmentId);
+      setSelectedDepartment(firstDepartmentId); // Set the first department as the default selection
+    }
+  }, [firstDepartmentId]);
 
   const handleDepartmentClick = (departmentId: number) => {
     setSelectedDepartment(departmentId);

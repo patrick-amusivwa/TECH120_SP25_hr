@@ -1,10 +1,9 @@
 import { Card, CardContent, Typography } from '@mui/material';
-import { PageContainer, PageHeader, WelcomeContainer } from './Home.styles';
+import { PageContainer, WelcomeContainer } from './Home.styles';
 
 const HomePage = () => {
   return (
     <PageContainer>
-      <PageHeader>Job Positions</PageHeader>
       <WelcomeContainer>
         <Card>
           <CardContent>

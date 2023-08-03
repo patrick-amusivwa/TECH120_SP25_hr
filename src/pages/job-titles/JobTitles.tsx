@@ -27,6 +27,7 @@ const JobTitles = () => {
   const [jobTitles, setJobTitles] = useState<IJobTitle[]>([]);
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [selectedJobTitle, setSelectedJobTitle] = useState<number | null>(null);
+  const [firstJobTitleId, setFirstJobTitleId] = useState<number | null>(null);
 
   const fetchJobTitles = async () => {
     try {
@@ -35,7 +36,11 @@ const JobTitles = () => {
       );
       const fetchedJobTitles = response.data;
       setJobTitles(fetchedJobTitles);
-      console.log(fetchedJobTitles);
+
+      if (fetchedJobTitles.length > 0) {
+        const firstJobTitle = fetchedJobTitles[0];
+        setFirstJobTitleId(firstJobTitle.id);
+      }
     } catch (error) {}
   };
 
@@ -52,6 +57,13 @@ const JobTitles = () => {
   useEffect(() => {
     fetchJobTitles();
   }, []);
+
+  useEffect(() => {
+    if (firstJobTitleId !== null) {
+      fetchEmployeesByJobTitle(firstJobTitleId);
+      setSelectedJobTitle(firstJobTitleId);
+    }
+  }, [firstJobTitleId]);
 
   const handleJobTitleClick = (jobTitleId: number) => {
     setSelectedJobTitle(jobTitleId);
