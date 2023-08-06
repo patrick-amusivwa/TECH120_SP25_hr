@@ -14,7 +14,7 @@ The Employee Management App is a web-based application that simplifies employee 
 - Typescript
 - Material UI
   
-- [Backend](https://github.com/iamtigermaximus/Employee-Management-Backend2)
+- [Backend](https://github.com/iamtigermaximus/Employee-Management-Backend2) : [Deployed App](https://employee-management-backend2.azurewebsites.net/swagger/index.html)
 
 ## Features <a name="features"></a> 
 - Create a new employee record.
