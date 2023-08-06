@@ -32,7 +32,7 @@ const JobTitles = () => {
   const fetchJobTitles = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:5158/api/v1/JobTitles'
+        'https://employee-management-backend2.azurewebsites.net/api/v1/JobTitles'
       );
       const fetchedJobTitles = response.data;
       setJobTitles(fetchedJobTitles);
@@ -42,7 +42,7 @@ const JobTitles = () => {
   const fetchEmployeesByJobTitle = async (jobTitleId: number) => {
     try {
       const response = await axios.get(
-        `http://localhost:5158/api/v1/Employees/JobTitle/${jobTitleId}`
+        `https://employee-management-backend2.azurewebsites.net/api/v1/Employees/JobTitle/${jobTitleId}`
       );
       const fetchedEmployees = response.data.data;
       setEmployees(fetchedEmployees);

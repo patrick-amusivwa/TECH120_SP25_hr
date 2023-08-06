@@ -49,7 +49,7 @@ const Employees = () => {
   const fetchEmployees = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:5158/api/v1/Employees'
+        'https://employee-management-backend2.azurewebsites.net/api/v1/Employees'
       );
 
       const fetchedEmployees = response.data;
@@ -71,7 +71,7 @@ const Employees = () => {
   const fetchDepartments = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:5158/api/v1/Departments'
+        'https://employee-management-backend2.azurewebsites.net/api/v1/Departments'
       );
 
       const fetchedDepartments = response.data;
@@ -83,7 +83,7 @@ const Employees = () => {
   const fetchJobTitles = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:5158/api/v1/JobTitles'
+        'https://employee-management-backend2.azurewebsites.net/api/v1//JobTitles'
       );
 
       const fetchedJobTitles = response.data;

@@ -24,14 +24,14 @@ const EmployeeDetails = () => {
     const fetchEmployee = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5158/api/v1/Employees/${id}`
+          `https://employee-management-backend2.azurewebsites.net/api/v1/Employees/${id}`
         );
         const fetchedEmployee = response.data.data;
 
         // Fetch department details
         if (fetchedEmployee.departmentId !== null) {
           const departmentResponse = await axios.get(
-            `http://localhost:5158/api/v1/Departments/${fetchedEmployee.departmentId}`
+            `https://employee-management-backend2.azurewebsites.net/api/v1/Departments/${fetchedEmployee.departmentId}`
           );
           fetchedEmployee.departmentName = departmentResponse.data.data.name;
         } else {
@@ -41,7 +41,7 @@ const EmployeeDetails = () => {
         // Fetch job title details
         if (fetchedEmployee.jobTitleId !== null) {
           const jobTitleResponse = await axios.get(
-            `http://localhost:5158/api/v1/JobTitles/${fetchedEmployee.jobTitleId}`
+            `http://employee-management-backend2.azurewebsites.net/api/v1/JobTitles/${fetchedEmployee.jobTitleId}`
           );
           fetchedEmployee.jobTitleName = jobTitleResponse.data.data.title;
         } else {

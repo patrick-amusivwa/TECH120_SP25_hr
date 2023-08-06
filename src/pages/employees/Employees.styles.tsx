@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const PageContainer = styled.div`
   width: 80vw;
-  height: 100vh;
+  height: 100%;
   background-color: #212121;
   float: left;
   color: white;

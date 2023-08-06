@@ -24,25 +24,40 @@ const AddEmployee = () => {
 
   useEffect(() => {
     // Fetch employee data
-    axios.get('http://localhost:5158/api/v1/Employees').then((response) => {
-      setEmployees(response.data);
-    });
+    axios
+      .get(
+        'https://employee-management-backend2.azurewebsites.net/api/v1/Employees'
+      )
+      .then((response) => {
+        setEmployees(response.data);
+      });
 
     // Fetch departments data
-    axios.get('http://localhost:5158/api/v1/Departments').then((response) => {
-      setDepartments(response.data);
-    });
+    axios
+      .get(
+        'https://employee-management-backend2.azurewebsites.net/api/v1/Departments'
+      )
+      .then((response) => {
+        setDepartments(response.data);
+      });
 
     // Fetch job titles data
-    axios.get('http://localhost:5158/api/v1/JobTitles').then((response) => {
-      setJobTitles(response.data);
-    });
+    axios
+      .get(
+        'https://employee-management-backend2.azurewebsites.net/api/v1/JobTitles'
+      )
+      .then((response) => {
+        setJobTitles(response.data);
+      });
   }, []);
 
   const handleFormSubmit = (formData: EmployeeData) => {
     // Make a POST request to the API endpoint to add a new employee
     axios
-      .post('http://localhost:5158/api/v1/Employees', formData)
+      .post(
+        'https://employee-management-backend2.azurewebsites.net/api/v1/Employees',
+        formData
+      )
       .then((response) => {
         console.log('Employee added successfully:', response.data);
       })

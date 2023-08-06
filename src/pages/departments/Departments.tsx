@@ -41,7 +41,7 @@ const Departments = () => {
   const fetchDepartments = async () => {
     try {
       const response = await axios.get(
-        'http://localhost:5158/api/v1/Departments'
+        'https://employee-management-backend2.azurewebsites.net/api/v1/Departments'
       );
       const fetchedDepartments = response.data;
       setDepartments(fetchedDepartments);
@@ -51,7 +51,7 @@ const Departments = () => {
   const fetchEmployeesByDepartment = async (departmentId: number) => {
     try {
       const response = await axios.get(
-        `http://localhost:5158/api/v1/Employees/department/${departmentId}`
+        `https://employee-management-backend2.azurewebsites.net/api/v1/Employees/department/${departmentId}`
       );
       const fetchedEmployees = response.data.data;
       setEmployees(fetchedEmployees);

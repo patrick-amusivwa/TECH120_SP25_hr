@@ -4,6 +4,8 @@ import {
   MenuItem,
   Select,
   TextField,
+  Snackbar,
+  Box,
 } from '@mui/material';
 import {
   ButtonContainer,
@@ -24,6 +26,7 @@ const EmployeeForm = ({
   onSubmit,
 }: EmployeeFormProps) => {
   const [formData, setFormData] = useState(employees);
+  const [isSuccessSnackbarOpen, setIsSuccessSnackbarOpen] = useState(false);
 
   const resetFormState = () => {
     setFormData({
@@ -77,7 +80,12 @@ const EmployeeForm = ({
     }
     console.log('Form Data:', formData);
     onSubmit(formData);
+    setIsSuccessSnackbarOpen(true);
     resetFormState();
+  };
+
+  const handleSnackbarClose = () => {
+    setIsSuccessSnackbarOpen(false);
   };
   return (
     <FormContainer>
@@ -175,6 +183,28 @@ const EmployeeForm = ({
           </InputBox>
         </InputContainer>
       </FormBodyContainer>
+      <Box
+        sx={{
+          position: 'relative',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Snackbar
+          open={isSuccessSnackbarOpen}
+          autoHideDuration={3000}
+          onClose={handleSnackbarClose}
+          message="New employee added successfully!"
+          sx={{
+            position: 'absolute',
+            top: -40,
+            left: '60%',
+            transform: 'translateX(-60%)',
+          }}
+        />
+      </Box>
+
       <ButtonContainer>
         <SubmitButton type="submit" variant="contained" onClick={handleSubmit}>
           Submit
