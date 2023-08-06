@@ -15,34 +15,22 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { Employee } from '../../interface/IEmployee';
+import { IEmployee, IJobTitle } from '../../interface/IEmployee';
 import {
   TableHeader,
   StyledTableRow,
   TableItem,
 } from '../employees/Employees.styles';
 import axiosInstance from '../../common/AxiosInstance';
-
-export interface IJobTitle {
-  id: number;
-  title: string;
-}
+import { fetchJobTitles } from '../../helpers/api';
 
 const JobTitles = () => {
   const [jobTitles, setJobTitles] = useState<IJobTitle[]>([]);
-  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [employees, setEmployees] = useState<IEmployee[]>([]);
   const [selectedJobTitle, setSelectedJobTitle] = useState<number | null>(null);
   const [activeJobTitle, setActiveJobTitle] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
-  const fetchJobTitles = async () => {
-    try {
-      const response = await axiosInstance.get('/JobTitles');
-      const fetchedJobTitles = response.data;
-      setJobTitles(fetchedJobTitles);
-    } catch (error) {}
-  };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -63,7 +51,7 @@ const JobTitles = () => {
   };
 
   useEffect(() => {
-    fetchJobTitles();
+    fetchJobTitles().then((data) => setJobTitles(data));
   }, []);
 
   useEffect(() => {

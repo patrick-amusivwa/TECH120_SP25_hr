@@ -13,12 +13,12 @@ import {
   FormBodyContainer,
   ButtonContainer,
 } from '../../components/employee-form/EmployeeForm.styles';
-import { Employee } from '../../interface/IEmployee';
+import { IEmployee } from '../../interface/IEmployee';
 import axiosInstance from '../../common/AxiosInstance';
 
 const EmployeeDetails = () => {
   const { id } = useParams();
-  const [employee, setEmployee] = useState<Employee | undefined>();
+  const [employee, setEmployee] = useState<IEmployee | undefined>();
   const [edit, setEdit] = useState(false);
 
   useEffect(() => {
@@ -73,7 +73,7 @@ const EmployeeDetails = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setEmployee((prevEmployee: Employee | undefined) => ({
+    setEmployee((prevEmployee: IEmployee | undefined) => ({
       ...prevEmployee!,
       [name]: value,
     }));

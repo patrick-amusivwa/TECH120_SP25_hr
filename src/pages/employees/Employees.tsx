@@ -17,31 +17,12 @@ import {
   TableRow,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import axiosInstance from '../../common/AxiosInstance';
-
-interface IEmployee {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  departmentId: number;
-  jobTitleId: number;
-  departmentName: string;
-  jobTitleName: string;
-  employmentStartDate: Date;
-  salary: number;
-}
-
-interface IDepartment {
-  id: number;
-  name: string;
-}
-
-interface IJobTitle {
-  id: number;
-  title: string;
-}
+import {
+  fetchDepartments,
+  fetchEmployees,
+  fetchJobTitles,
+} from '../../helpers/api';
+import { IEmployee, IDepartment, IJobTitle } from '../../interface/IEmployee';
 
 const Employees = () => {
   const [employees, setEmployees] = useState<IEmployee[]>([]);
@@ -49,15 +30,6 @@ const Employees = () => {
   const [jobTitles, setJobTitles] = useState<IJobTitle[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
-  const fetchEmployees = async () => {
-    try {
-      const response = await axiosInstance.get('/Employees');
-      const fetchedEmployees = response.data;
-      setEmployees(fetchedEmployees);
-      console.table(fetchedEmployees);
-    } catch (error) {}
-  };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -67,40 +39,31 @@ const Employees = () => {
     setCurrentPage(value);
   };
 
-  const getDepartmentName = (departmentId: number) => {
+  const getDepartmentName = (
+    departmentId: number | null,
+    departments: IDepartment[]
+  ) => {
+    if (departmentId === null) {
+      return 'N/A';
+    }
+
     const department = departments.find((dept) => dept.id === departmentId);
-    return department ? department.name : 'Unknown Department';
+    return department ? department.name : 'N/A';
   };
 
-  const getJobTitle = (jobTitleId: number) => {
+  const getJobTitle = (jobTitleId: number | null, jobTitles: IJobTitle[]) => {
+    if (jobTitleId === null) {
+      return 'N/A';
+    }
+
     const jobTitle = jobTitles.find((title) => title.id === jobTitleId);
-    return jobTitle ? jobTitle.title : 'Unknown Job Title';
-  };
-
-  const fetchDepartments = async () => {
-    try {
-      const response = await axiosInstance.get('/Departments');
-
-      const fetchedDepartments = response.data;
-      setDepartments(fetchedDepartments);
-      console.log(fetchedDepartments);
-    } catch (error) {}
-  };
-
-  const fetchJobTitles = async () => {
-    try {
-      const response = await axiosInstance.get('/JobTitles');
-
-      const fetchedJobTitles = response.data;
-      setJobTitles(fetchedJobTitles);
-      console.log(fetchedJobTitles);
-    } catch (error) {}
+    return jobTitle ? jobTitle.title : 'N/A';
   };
 
   useEffect(() => {
-    fetchEmployees();
-    fetchDepartments();
-    fetchJobTitles();
+    fetchEmployees().then((data) => setEmployees(data));
+    fetchDepartments().then((data) => setDepartments(data));
+    fetchJobTitles().then((data) => setJobTitles(data));
   }, []);
 
   return (
@@ -153,11 +116,13 @@ const Employees = () => {
                   </TableCell>
                   <TableCell>
                     <TableItem>
-                      {getDepartmentName(employee.departmentId)}
+                      {getDepartmentName(employee.departmentId, departments)}
                     </TableItem>
                   </TableCell>
                   <TableCell>
-                    <TableItem> {getJobTitle(employee.jobTitleId)}</TableItem>
+                    <TableItem>
+                      {getJobTitle(employee.jobTitleId, jobTitles)}
+                    </TableItem>
                   </TableCell>
                   <TableCell>
                     <TableItem> {employee.salary}</TableItem>

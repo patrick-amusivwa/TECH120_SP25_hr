@@ -8,23 +8,23 @@ export interface EmployeeData {
   jobTitleId: number | null;
 }
 
-export interface DepartmentData {
+export interface IDepartment {
   id: number;
   name: string;
 }
 
-export interface JobTitleData {
+export interface IJobTitle {
   id: number;
   title: string;
 }
 
 export interface EmployeeFormProps {
   employees: EmployeeData;
-  departments: DepartmentData[];
-  jobTitles: JobTitleData[];
+  departments: IDepartment[];
+  jobTitles: IJobTitle[];
   onSubmit: (formData: EmployeeData) => void;
 }
-export interface Employee {
+export interface IEmployee {
   id: number;
   firstName: string;
   lastName: string;

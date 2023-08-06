@@ -15,13 +15,14 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { Employee } from '../../interface/IEmployee';
 import {
   TableHeader,
   StyledTableRow,
   TableItem,
 } from '../employees/Employees.styles';
 import axiosInstance from '../../common/AxiosInstance';
+import { fetchDepartments } from '../../helpers/api';
+import { IEmployee } from '../../interface/IEmployee';
 
 export interface IDepartment {
   id: number;
@@ -35,23 +36,13 @@ export interface IJobTitle {
 
 const Departments = () => {
   const [departments, setDepartments] = useState<IDepartment[]>([]);
-  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [employees, setEmployees] = useState<IEmployee[]>([]);
   const [selectedDepartment, setSelectedDepartment] = useState<number | null>(
     null
   );
   const [activeDepartment, setActiveDepartment] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-
-  // const [jobTitles, setJobTitles] = useState<IJobTitle[]>([]);
-
-  const fetchDepartments = async () => {
-    try {
-      const response = await axiosInstance.get('/Departments');
-      const fetchedDepartments = response.data;
-      setDepartments(fetchedDepartments);
-    } catch (error) {}
-  };
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -72,7 +63,7 @@ const Departments = () => {
   };
 
   useEffect(() => {
-    fetchDepartments();
+    fetchDepartments().then((data) => setDepartments(data));
   }, []);
 
   useEffect(() => {
