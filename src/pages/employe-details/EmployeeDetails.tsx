@@ -18,7 +18,8 @@ import { Employee } from '../../interface/IEmployee';
 
 const EmployeeDetails = () => {
   const { id } = useParams();
-  const [employee, setEmployee] = useState<Employee>();
+  const [employee, setEmployee] = useState<Employee | undefined>();
+  const [edit, setEdit] = useState(false);
 
   useEffect(() => {
     const fetchEmployee = async () => {
@@ -41,7 +42,7 @@ const EmployeeDetails = () => {
         // Fetch job title details
         if (fetchedEmployee.jobTitleId !== null) {
           const jobTitleResponse = await axios.get(
-            `http://employee-management-backend2.azurewebsites.net/api/v1/JobTitles/${fetchedEmployee.jobTitleId}`
+            `https://employee-management-backend2.azurewebsites.net/api/v1/JobTitles/${fetchedEmployee.jobTitleId}`
           );
           fetchedEmployee.jobTitleName = jobTitleResponse.data.data.title;
         } else {
@@ -60,6 +61,28 @@ const EmployeeDetails = () => {
     }
   }, [id]);
 
+  const handleUpdateEmployee = async () => {
+    try {
+      // Make an HTTP PUT request to update the employee details in the database
+      await axios.put(
+        `https://employee-management-backend2.azurewebsites.net/api/v1/Employees/${id}`,
+        employee
+      );
+      console.log('Employee details updated successfully');
+      // Once the update is successful, exit edit mode
+      setEdit(false);
+    } catch (error) {
+      console.error('Error updating employee details:', error);
+    }
+  };
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setEmployee((prevEmployee: Employee | undefined) => ({
+      ...prevEmployee!,
+      [name]: value,
+    }));
+  };
   return (
     <PageContainer>
       <PageHeader>Employee Details</PageHeader>
@@ -73,9 +96,11 @@ const EmployeeDetails = () => {
               fullWidth
               margin="normal"
               variant="outlined"
+              disabled={!edit}
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={handleChange}
             />
             <TextField
               label="Email"
@@ -84,9 +109,11 @@ const EmployeeDetails = () => {
               fullWidth
               margin="normal"
               variant="outlined"
+              disabled={!edit}
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={handleChange}
             />
             <TextField
               label="Department"
@@ -95,9 +122,11 @@ const EmployeeDetails = () => {
               fullWidth
               margin="normal"
               variant="outlined"
+              disabled={!edit}
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={handleChange}
             />
             <TextField
               label="Salary"
@@ -106,9 +135,11 @@ const EmployeeDetails = () => {
               fullWidth
               margin="normal"
               variant="outlined"
+              disabled={!edit}
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={handleChange}
             />
           </InputBox>
         </InputContainer>
@@ -121,9 +152,11 @@ const EmployeeDetails = () => {
               fullWidth
               margin="normal"
               variant="outlined"
+              disabled={!edit}
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={handleChange}
             />
             <TextField
               label="Phone Number"
@@ -132,9 +165,11 @@ const EmployeeDetails = () => {
               fullWidth
               margin="normal"
               variant="outlined"
+              disabled={!edit}
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={handleChange}
             />
             <TextField
               label="Job Title"
@@ -143,15 +178,27 @@ const EmployeeDetails = () => {
               fullWidth
               margin="normal"
               variant="outlined"
+              disabled={!edit}
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={handleChange}
             />
           </InputBox>
         </InputContainer>
       </FormBodyContainer>
       <ButtonContainer>
-        <EditButton variant="contained">Edit</EditButton>
+        {edit ? (
+          // Save button (visible in edit mode)
+          <EditButton variant="contained" onClick={handleUpdateEmployee}>
+            Save
+          </EditButton>
+        ) : (
+          // Edit button (visible when not in edit mode)
+          <EditButton variant="contained" onClick={() => setEdit(true)}>
+            Edit
+          </EditButton>
+        )}
       </ButtonContainer>
     </PageContainer>
   );
