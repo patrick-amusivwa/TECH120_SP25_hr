@@ -4,7 +4,6 @@ import {
   PageHeader,
   PaginationContainer,
 } from './JobTitles.styles';
-import axios from 'axios';
 import {
   Box,
   Button,
@@ -22,6 +21,7 @@ import {
   StyledTableRow,
   TableItem,
 } from '../employees/Employees.styles';
+import axiosInstance from '../../common/AxiosInstance';
 
 export interface IJobTitle {
   id: number;
@@ -38,9 +38,7 @@ const JobTitles = () => {
 
   const fetchJobTitles = async () => {
     try {
-      const response = await axios.get(
-        'https://employee-management-backend2.azurewebsites.net/api/v1/JobTitles'
-      );
+      const response = await axiosInstance.get('/JobTitles');
       const fetchedJobTitles = response.data;
       setJobTitles(fetchedJobTitles);
     } catch (error) {}
@@ -56,8 +54,8 @@ const JobTitles = () => {
 
   const fetchEmployeesByJobTitle = async (jobTitleId: number) => {
     try {
-      const response = await axios.get(
-        `https://employee-management-backend2.azurewebsites.net/api/v1/Employees/JobTitle/${jobTitleId}`
+      const response = await axiosInstance.get(
+        `/Employees/JobTitle/${jobTitleId}`
       );
       const fetchedEmployees = response.data.data;
       setEmployees(fetchedEmployees);

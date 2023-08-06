@@ -7,7 +7,6 @@ import {
   TableHeader,
   TableItem,
 } from './Employees.styles';
-import axios from 'axios';
 import {
   Box,
   Pagination,
@@ -18,6 +17,7 @@ import {
   TableRow,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import axiosInstance from '../../common/AxiosInstance';
 
 interface IEmployee {
   id: number;
@@ -52,10 +52,7 @@ const Employees = () => {
 
   const fetchEmployees = async () => {
     try {
-      const response = await axios.get(
-        'https://employee-management-backend2.azurewebsites.net/api/v1/Employees'
-      );
-
+      const response = await axiosInstance.get('/Employees');
       const fetchedEmployees = response.data;
       setEmployees(fetchedEmployees);
       console.table(fetchedEmployees);
@@ -82,9 +79,7 @@ const Employees = () => {
 
   const fetchDepartments = async () => {
     try {
-      const response = await axios.get(
-        'https://employee-management-backend2.azurewebsites.net/api/v1/Departments'
-      );
+      const response = await axiosInstance.get('/Departments');
 
       const fetchedDepartments = response.data;
       setDepartments(fetchedDepartments);
@@ -94,9 +89,7 @@ const Employees = () => {
 
   const fetchJobTitles = async () => {
     try {
-      const response = await axios.get(
-        'https://employee-management-backend2.azurewebsites.net/api/v1//JobTitles'
-      );
+      const response = await axiosInstance.get('/JobTitles');
 
       const fetchedJobTitles = response.data;
       setJobTitles(fetchedJobTitles);

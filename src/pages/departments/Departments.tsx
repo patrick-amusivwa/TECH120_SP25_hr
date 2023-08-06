@@ -4,7 +4,6 @@ import {
   PageHeader,
   PaginationContainer,
 } from './Departments.styles';
-import axios from 'axios';
 import {
   Box,
   Button,
@@ -22,6 +21,7 @@ import {
   StyledTableRow,
   TableItem,
 } from '../employees/Employees.styles';
+import axiosInstance from '../../common/AxiosInstance';
 
 export interface IDepartment {
   id: number;
@@ -47,9 +47,7 @@ const Departments = () => {
 
   const fetchDepartments = async () => {
     try {
-      const response = await axios.get(
-        'https://employee-management-backend2.azurewebsites.net/api/v1/Departments'
-      );
+      const response = await axiosInstance.get('/Departments');
       const fetchedDepartments = response.data;
       setDepartments(fetchedDepartments);
     } catch (error) {}
@@ -65,8 +63,8 @@ const Departments = () => {
 
   const fetchEmployeesByDepartment = async (departmentId: number) => {
     try {
-      const response = await axios.get(
-        `https://employee-management-backend2.azurewebsites.net/api/v1/Employees/department/${departmentId}`
+      const response = await axiosInstance.get(
+        `/Employees/department/${departmentId}`
       );
       const fetchedEmployees = response.data.data;
       setEmployees(fetchedEmployees);

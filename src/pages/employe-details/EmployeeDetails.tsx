@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import {
   EditButton,
   PageContainer,
@@ -15,6 +14,7 @@ import {
   ButtonContainer,
 } from '../../components/employee-form/EmployeeForm.styles';
 import { Employee } from '../../interface/IEmployee';
+import axiosInstance from '../../common/AxiosInstance';
 
 const EmployeeDetails = () => {
   const { id } = useParams();
@@ -24,15 +24,13 @@ const EmployeeDetails = () => {
   useEffect(() => {
     const fetchEmployee = async () => {
       try {
-        const response = await axios.get(
-          `https://employee-management-backend2.azurewebsites.net/api/v1/Employees/${id}`
-        );
+        const response = await axiosInstance.get(`/Employees/${id}`);
         const fetchedEmployee = response.data.data;
 
         // Fetch department details
         if (fetchedEmployee.departmentId !== null) {
-          const departmentResponse = await axios.get(
-            `https://employee-management-backend2.azurewebsites.net/api/v1/Departments/${fetchedEmployee.departmentId}`
+          const departmentResponse = await axiosInstance.get(
+            `/Departments/${fetchedEmployee.departmentId}`
           );
           fetchedEmployee.departmentName = departmentResponse.data.data.name;
         } else {
@@ -41,8 +39,8 @@ const EmployeeDetails = () => {
 
         // Fetch job title details
         if (fetchedEmployee.jobTitleId !== null) {
-          const jobTitleResponse = await axios.get(
-            `https://employee-management-backend2.azurewebsites.net/api/v1/JobTitles/${fetchedEmployee.jobTitleId}`
+          const jobTitleResponse = await axiosInstance.get(
+            `/JobTitles/${fetchedEmployee.jobTitleId}`
           );
           fetchedEmployee.jobTitleName = jobTitleResponse.data.data.title;
         } else {
@@ -64,10 +62,7 @@ const EmployeeDetails = () => {
   const handleUpdateEmployee = async () => {
     try {
       // Make an HTTP PUT request to update the employee details in the database
-      await axios.put(
-        `https://employee-management-backend2.azurewebsites.net/api/v1/Employees/${id}`,
-        employee
-      );
+      await axiosInstance.put(`/Employees/${id}`, employee);
       console.log('Employee details updated successfully');
       // Once the update is successful, exit edit mode
       setEdit(false);
