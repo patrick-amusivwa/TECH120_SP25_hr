@@ -1,9 +1,14 @@
-import { useEffect, useState } from 'react';
-import { PageContainer, PageHeader } from './JobTitles.styles';
+import { ChangeEvent, useEffect, useState } from 'react';
+import {
+  PageContainer,
+  PageHeader,
+  PaginationContainer,
+} from './JobTitles.styles';
 import axios from 'axios';
 import {
   Box,
   Button,
+  Pagination,
   Table,
   TableBody,
   TableCell,
@@ -28,6 +33,8 @@ const JobTitles = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [selectedJobTitle, setSelectedJobTitle] = useState<number | null>(null);
   const [activeJobTitle, setActiveJobTitle] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const fetchJobTitles = async () => {
     try {
@@ -37,6 +44,14 @@ const JobTitles = () => {
       const fetchedJobTitles = response.data;
       setJobTitles(fetchedJobTitles);
     } catch (error) {}
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentEmployees = employees.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {
+    setCurrentPage(value);
   };
 
   const fetchEmployeesByJobTitle = async (jobTitleId: number) => {
@@ -127,7 +142,7 @@ const JobTitles = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {employees.map((employee) => (
+                {currentEmployees.map((employee) => (
                   <StyledTableRow key={employee.id}>
                     <TableCell>
                       <TableItem>{employee.lastName}</TableItem>
@@ -151,6 +166,14 @@ const JobTitles = () => {
           </Box>
         </>
       )}
+      <PaginationContainer>
+        <Pagination
+          count={Math.ceil(employees.length / itemsPerPage)}
+          page={currentPage}
+          onChange={handlePageChange}
+          sx={{ backgroundColor: 'white' }}
+        />
+      </PaginationContainer>
     </PageContainer>
   );
 };

@@ -1,9 +1,14 @@
-import { useEffect, useState } from 'react';
-import { PageContainer, PageHeader } from './Departments.styles';
+import { ChangeEvent, useEffect, useState } from 'react';
+import {
+  PageContainer,
+  PageHeader,
+  PaginationContainer,
+} from './Departments.styles';
 import axios from 'axios';
 import {
   Box,
   Button,
+  Pagination,
   Table,
   TableBody,
   TableCell,
@@ -35,6 +40,8 @@ const Departments = () => {
     null
   );
   const [activeDepartment, setActiveDepartment] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   // const [jobTitles, setJobTitles] = useState<IJobTitle[]>([]);
 
@@ -46,6 +53,14 @@ const Departments = () => {
       const fetchedDepartments = response.data;
       setDepartments(fetchedDepartments);
     } catch (error) {}
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentEmployees = employees.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {
+    setCurrentPage(value);
   };
 
   const fetchEmployeesByDepartment = async (departmentId: number) => {
@@ -137,7 +152,7 @@ const Departments = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {employees.map((employee) => (
+                {currentEmployees.map((employee) => (
                   <StyledTableRow key={employee.id}>
                     <TableCell>
                       <TableItem>{employee.lastName}</TableItem>
@@ -161,6 +176,14 @@ const Departments = () => {
           </Box>
         </>
       )}
+      <PaginationContainer>
+        <Pagination
+          count={Math.ceil(employees.length / itemsPerPage)}
+          page={currentPage}
+          onChange={handlePageChange}
+          sx={{ backgroundColor: 'white' }}
+        />
+      </PaginationContainer>
     </PageContainer>
   );
 };

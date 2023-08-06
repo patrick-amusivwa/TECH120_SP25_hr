@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import styled from 'styled-components';
 
 export const PageContainer = styled.div`
@@ -25,4 +26,10 @@ export const PageHeader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const PaginationContainer = styled(Box)`
+  display: flex;
+  justify-content: center;
+  margin: 30px;
 `;

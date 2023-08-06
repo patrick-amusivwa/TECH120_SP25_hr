@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import {
   PageContainer,
   PageHeader,
+  PaginationContainer,
   StyledTableRow,
   TableHeader,
   TableItem,
@@ -9,6 +10,7 @@ import {
 import axios from 'axios';
 import {
   Box,
+  Pagination,
   Table,
   TableBody,
   TableCell,
@@ -45,6 +47,8 @@ const Employees = () => {
   const [employees, setEmployees] = useState<IEmployee[]>([]);
   const [departments, setDepartments] = useState<IDepartment[]>([]);
   const [jobTitles, setJobTitles] = useState<IJobTitle[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   const fetchEmployees = async () => {
     try {
@@ -56,6 +60,14 @@ const Employees = () => {
       setEmployees(fetchedEmployees);
       console.table(fetchedEmployees);
     } catch (error) {}
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentEmployees = employees.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handlePageChange = (event: ChangeEvent<unknown>, value: number) => {
+    setCurrentPage(value);
   };
 
   const getDepartmentName = (departmentId: number) => {
@@ -130,7 +142,7 @@ const Employees = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {employees.map((employee) => (
+              {currentEmployees.map((employee) => (
                 <StyledTableRow key={employee.id}>
                   <TableCell>
                     <Link to={`/employees/${employee.id}`}>
@@ -162,6 +174,14 @@ const Employees = () => {
             </TableBody>
           </Table>
         </Box>
+        <PaginationContainer>
+          <Pagination
+            count={Math.ceil(employees.length / itemsPerPage)}
+            page={currentPage}
+            onChange={handlePageChange}
+            sx={{ backgroundColor: 'white' }}
+          />
+        </PaginationContainer>
       </PageContainer>
       ;
     </>
