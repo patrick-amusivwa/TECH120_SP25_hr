@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-// import { breakpoints as bp } from '../../utils/layout';
+import { breakpoints as bp } from '../../utils/layout';
+import { Card, CardContent } from '@mui/material';
 
 export const PageContainer = styled.div`
   width: 80vw;
@@ -8,9 +9,12 @@ export const PageContainer = styled.div`
   float: left;
   color: white;
   padding: 20px;
-
   display: flex;
   flex-direction: column;
+
+  @media (max-width: ${bp.sm}) {
+    width: 85vw;
+  }
 `;
 
 export const PageHeader = styled.div`
@@ -26,6 +30,12 @@ export const PageHeader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: ${bp.xs}) {
+    height: 50px;
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
 `;
 
 export const WelcomeContainer = styled.div`
@@ -41,4 +51,43 @@ export const WelcomeContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: ${bp.sm}) {
+    padding: 2px;
+    margin: 10px 0;
+    letter-spacing: 1px;
+  }
+`;
+
+export const WelcomeCard = styled(Card)`
+  @media (max-width: ${bp.xs}) {
+    padding: 5px;
+  }
+`;
+
+export const WelcomeCardContent = styled(CardContent)``;
+
+export const CardHeader = styled('h1')`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 30px;
+
+  @media (max-width: ${bp.xs}) {
+    font-size: 15px;
+  }
+`;
+
+export const CardBodyText = styled('h1')`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 20px;
+  padding: 15px;
+
+  @media (max-width: ${bp.xs}) {
+    font-size: 13px;
+  }
 `;

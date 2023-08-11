@@ -1,35 +1,24 @@
-import { Card, CardContent, Typography } from '@mui/material';
-import { PageContainer, WelcomeContainer } from './Home.styles';
+import {
+  CardBodyText,
+  CardHeader,
+  PageContainer,
+  WelcomeCard,
+  WelcomeContainer,
+} from './Home.styles';
 
 const HomePage = () => {
   return (
     <PageContainer>
       <WelcomeContainer>
-        <Card>
-          <CardContent>
-            <Typography
-              variant="h3"
-              gutterBottom
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '100%',
-              }}
-            >
-              Employee Management App
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                fontSize: '18px',
-              }}
-            >
+        <WelcomeCard>
+          <div>
+            <CardHeader>Employee Management App</CardHeader>
+            <CardBodyText>
               Welcome to the Employee Management App. This app allows you to
               manage your company's employees efficiently.
-            </Typography>
-          </CardContent>
-        </Card>
+            </CardBodyText>
+          </div>
+        </WelcomeCard>
       </WelcomeContainer>
     </PageContainer>
   );

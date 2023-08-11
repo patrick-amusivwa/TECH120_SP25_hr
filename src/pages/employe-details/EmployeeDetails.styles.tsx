@@ -1,5 +1,6 @@
 import { Box, Button } from '@mui/material';
 import styled from 'styled-components';
+import { breakpoints as bp } from '../../utils/layout';
 
 export const PageContainer = styled.div`
   width: 80vw;
@@ -26,6 +27,12 @@ export const PageHeader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: ${bp.sm}) {
+    height: 50px;
+    font-size: 15px;
+    letter-spacing: 1px;
+  }
 `;
 
 export const ButtonContainer = styled(Box)`

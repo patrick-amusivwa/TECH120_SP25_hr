@@ -1,5 +1,6 @@
-import { Box, Button, Container } from '@mui/material';
+import { Box, Button, Container, TextField } from '@mui/material';
 import styled from 'styled-components';
+import { breakpoints as bp } from '../../utils/layout';
 
 export const FormContainer = styled(Box)`
   border: 1px solid white;
@@ -14,6 +15,11 @@ export const FormBodyContainer = styled(Box)`
   flex-direction: row;
   width: 100%;
   padding: 30px;
+
+  @media (max-width: ${bp.sm}) {
+    background: pink;
+    padding: 0;
+  }
 `;
 
 export const InputContainer = styled(Container)`
@@ -41,3 +47,11 @@ export const SubmitButton = styled(Button)`
 export const style = {
   color: 'white',
 };
+
+export const StyledTextField = styled(TextField)`
+  @media (max-width: ${bp.sm}) {
+    border: 1px solid red;
+    width: 100px;
+    height: 50px;
+  }
+`;

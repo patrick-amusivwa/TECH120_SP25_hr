@@ -3,14 +3,14 @@ import {
   PageContainer,
   PageHeader,
   PaginationContainer,
+  StyledTable,
   StyledTableRow,
+  TableContainer,
   TableHeader,
   TableItem,
 } from './Employees.styles';
 import {
-  Box,
   Pagination,
-  Table,
   TableBody,
   TableCell,
   TableHead,
@@ -70,8 +70,8 @@ const Employees = () => {
     <>
       <PageContainer>
         <PageHeader>Employees</PageHeader>
-        <Box sx={{ m: 3, border: '1px solid white' }}>
-          <Table>
+        <TableContainer>
+          <StyledTable>
             <TableHead>
               <TableRow>
                 <TableCell>
@@ -130,8 +130,8 @@ const Employees = () => {
                 </StyledTableRow>
               ))}
             </TableBody>
-          </Table>
-        </Box>
+          </StyledTable>
+        </TableContainer>
         <PaginationContainer>
           <Pagination
             count={Math.ceil(employees.length / itemsPerPage)}

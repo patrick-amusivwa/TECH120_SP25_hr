@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Logo,
   LogoContainer,
@@ -6,7 +5,7 @@ import {
   MenuItem,
   SidebarContainer,
 } from './Sidebar.styles';
-import { FaHouse, FaStaylinked, FaUserPlus } from 'react-icons/fa6';
+import { FaHouse, FaStaylinked, FaUserPlus, FaBuilding } from 'react-icons/fa6';
 import { HiBriefcase, HiUserGroup } from 'react-icons/hi';
 const Sidebar = () => {
   return (
@@ -30,7 +29,7 @@ const Sidebar = () => {
         <MenuItem> EMPLOYEES</MenuItem>
       </MenuContainer>
       <MenuContainer to="/departments">
-        <HiUserGroup />
+        <FaBuilding />
         <MenuItem> DEPARTMENTS</MenuItem>
       </MenuContainer>
       <MenuContainer to="/job-titles">

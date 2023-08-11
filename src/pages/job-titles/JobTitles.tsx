@@ -1,26 +1,25 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import {
+  JobTitleContainer,
+  JobTitlesContainer,
   PageContainer,
   PageHeader,
   PaginationContainer,
+  Position,
+  StyledTable,
+  TableContainer,
+  TableHeader,
 } from './JobTitles.styles';
 import {
-  Box,
   Button,
   Pagination,
-  Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
-  Typography,
 } from '@mui/material';
 import { IEmployee, IJobTitle } from '../../interface/IEmployee';
-import {
-  TableHeader,
-  StyledTableRow,
-  TableItem,
-} from '../employees/Employees.styles';
+import { StyledTableRow, TableItem } from '../employees/Employees.styles';
 import axiosInstance from '../../common/AxiosInstance';
 import { fetchJobTitles } from '../../helpers/api';
 
@@ -72,42 +71,26 @@ const JobTitles = () => {
   return (
     <PageContainer>
       <PageHeader>Job Titles</PageHeader>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          width: '100%',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-        }}
-      >
+      <JobTitlesContainer>
         {jobTitles.map((jobTitle) => (
-          <Box
+          <JobTitleContainer
             key={jobTitle.id}
             onClick={() => handleJobTitleClick(jobTitle.id)}
             sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              border: '1px solid white',
-              m: 1,
-              width: '300px',
-              flexWrap: 'wrap',
               backgroundColor:
                 jobTitle.id === activeJobTitle ? 'green' : 'transparent',
             }}
           >
             <Button>
-              <Typography sx={{ color: 'white' }}>{jobTitle.title}</Typography>
+              <Position>{jobTitle.title}</Position>
             </Button>
-          </Box>
+          </JobTitleContainer>
         ))}
-      </Box>
+      </JobTitlesContainer>
       {selectedJobTitle !== null && (
         <>
-          <Box sx={{ m: 3, border: '1px solid white' }}>
-            <Table>
+          <TableContainer>
+            <StyledTable>
               <TableHead>
                 <TableRow>
                   <TableCell>
@@ -148,8 +131,8 @@ const JobTitles = () => {
                   </StyledTableRow>
                 ))}
               </TableBody>
-            </Table>
-          </Box>
+            </StyledTable>
+          </TableContainer>
         </>
       )}
       <PaginationContainer>

@@ -3,7 +3,6 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  TextField,
   Snackbar,
   Box,
 } from '@mui/material';
@@ -13,6 +12,7 @@ import {
   FormContainer,
   InputBox,
   InputContainer,
+  StyledTextField,
   SubmitButton,
   style,
 } from './EmployeeForm.styles';
@@ -92,7 +92,7 @@ const EmployeeForm = ({
       <FormBodyContainer onSubmit={handleSubmit}>
         <InputContainer sx={{ ...style, backgroundColor: 'white' }}>
           <InputBox>
-            <TextField
+            <StyledTextField
               label="First Name"
               name="firstName"
               value={formData.firstName}
@@ -102,7 +102,7 @@ const EmployeeForm = ({
               variant="outlined"
             />
 
-            <TextField
+            <StyledTextField
               label="Email"
               name="email"
               type="email"
@@ -152,7 +152,7 @@ const EmployeeForm = ({
         </InputContainer>
         <InputContainer sx={{ ...style, backgroundColor: 'white' }}>
           <InputBox>
-            <TextField
+            <StyledTextField
               label="Last Name"
               name="lastName"
               value={formData.lastName}
@@ -161,7 +161,7 @@ const EmployeeForm = ({
               margin="normal"
               variant="outlined"
             />
-            <TextField
+            <StyledTextField
               label="Phone Number"
               name="phoneNumber"
               value={formData.phoneNumber}
@@ -170,7 +170,7 @@ const EmployeeForm = ({
               margin="normal"
               variant="outlined"
             />
-            <TextField
+            <StyledTextField
               label="Salary"
               name="salary"
               type="number"
