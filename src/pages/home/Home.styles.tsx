@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { breakpoints as bp } from '../../utils/layout';
-import { Card, CardContent } from '@mui/material';
+import { Card } from '@mui/material';
 
 export const PageContainer = styled.div`
   width: 80vw;

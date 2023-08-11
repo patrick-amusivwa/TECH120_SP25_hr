@@ -67,6 +67,10 @@ export const MenuContainer = styled(Link)`
   text-decoration: none;
   color: white;
 
+  &.active {
+    background-color: green;
+  }
+
   @media (max-width: ${bp.md}) {
     width: 40px;
     height: 40px;
