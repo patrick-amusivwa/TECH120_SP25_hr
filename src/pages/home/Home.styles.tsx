@@ -53,9 +53,10 @@ export const WelcomeContainer = styled.div`
   align-items: center;
 
   @media (max-width: ${bp.sm}) {
-    padding: 2px;
-    margin: 10px 0;
+    padding: 150px 0;
     letter-spacing: 1px;
+
+    align-items: flex-start;
   }
 `;
 
@@ -75,7 +76,7 @@ export const CardHeader = styled('h1')`
   font-size: 30px;
 
   @media (max-width: ${bp.xs}) {
-    font-size: 15px;
+    font-size: 10px;
   }
 `;
 
