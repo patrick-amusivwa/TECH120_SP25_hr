@@ -33,6 +33,11 @@ export const LogoContainer = styled.div`
     width: 50px;
     height: 50px;
   }
+
+  @media (max-width: ${bp.md}) {
+    width: 70px;
+    height: 70px;
+  }
 `;
 
 export const Logo = styled.div`
@@ -44,6 +49,10 @@ export const Logo = styled.div`
 
   @media (max-width: ${bp.sm}) {
     font-size: 13px;
+  }
+
+  @media (max-width: ${bp.md}) {
+    font-size: 25px;
   }
 `;
 
@@ -58,7 +67,7 @@ export const MenuContainer = styled(Link)`
   text-decoration: none;
   color: white;
 
-  @media (max-width: ${bp.sm}) {
+  @media (max-width: ${bp.md}) {
     width: 40px;
     height: 40px;
     justify-content: center;
@@ -68,7 +77,7 @@ export const MenuContainer = styled(Link)`
 export const MenuItem = styled.div`
   padding: 0 10px;
 
-  @media (max-width: ${bp.sm}) {
+  @media (max-width: ${bp.md}) {
     display: none;
   }
 `;

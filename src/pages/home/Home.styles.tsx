@@ -43,30 +43,31 @@ export const WelcomeContainer = styled.div`
   height: 100%;
   border: 1px solid white;
   color: white;
-  padding: 20px;
+  padding: 150px 0;
   margin: 30px 0;
   font-size: 30px;
   letter-spacing: 5px;
 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 
-  @media (max-width: ${bp.sm}) {
-    padding: 150px 0;
+  @media (max-width: ${bp.md}) {
     letter-spacing: 1px;
-
-    align-items: flex-start;
   }
 `;
 
 export const WelcomeCard = styled(Card)`
+  padding: 50px 0;
+
   @media (max-width: ${bp.xs}) {
     padding: 5px;
   }
 `;
 
-export const WelcomeCardContent = styled(CardContent)``;
+export const WelcomeCardContent = styled('div')`
+  padding: 50px 0;
+`;
 
 export const CardHeader = styled('h1')`
   display: flex;

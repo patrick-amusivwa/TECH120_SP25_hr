@@ -3,6 +3,7 @@ import {
   CardHeader,
   PageContainer,
   WelcomeCard,
+  WelcomeCardContent,
   WelcomeContainer,
 } from './Home.styles';
 
@@ -11,13 +12,13 @@ const HomePage = () => {
     <PageContainer>
       <WelcomeContainer>
         <WelcomeCard>
-          <div>
+          <WelcomeCardContent>
             <CardHeader>Employee Management App</CardHeader>
             <CardBodyText>
               Welcome to the Employee Management App. This app allows you to
               manage your company's employees efficiently.
             </CardBodyText>
-          </div>
+          </WelcomeCardContent>
         </WelcomeCard>
       </WelcomeContainer>
     </PageContainer>
