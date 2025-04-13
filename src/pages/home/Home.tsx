@@ -21,6 +21,13 @@ const HomePage = () => {
           </WelcomeCardContent>
         </WelcomeCard>
       </WelcomeContainer>
+
+      {/* Footer with names and roles */}
+      <footer style={{ marginTop: '20px', textAlign: 'center' }}>
+        <p>Ali Alajmi (77464) - Project Manager</p>
+        <p>Salma Alazmi (10093132) - Frontend Developer</p>
+        <p>Athoob Almutar (10088045) - UI/UX Designer</p>
+      </footer>
     </PageContainer>
   );
 };
