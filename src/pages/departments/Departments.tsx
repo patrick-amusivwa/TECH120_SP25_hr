@@ -156,6 +156,13 @@ const Departments = () => {
           sx={{ backgroundColor: 'white' }}
         />
       </PaginationContainer>
+
+      {/* Footer with names */}
+      <footer style={{ marginTop: '20px', textAlign: 'center' }}>
+        <p>Ali Alajmi (77464)</p>
+        <p>Salma Alazmi (10093132)</p>
+        <p>Athoob Almutar (10088045)</p>
+      </footer>
     </PageContainer>
   );
 };
